@@ -1,18 +1,27 @@
-version: "3.9"
+
 
 
 services:
   app:
     build: .
+    restart: unless-stopped #для app — приложение будет перезапускаться, если упадёт.
     ports:
       -  "8000:8000"
     depends_on:
       - db
     environment:
-      DATABASE_URL: postgresql://user:pass@db:5432/app
+      DATABASE_URL: ${DATABASE_URL}
+    volumes:
+      - .:/app
   db:
     image: postgres:15
+    restart: always #для db — база будет подниматься автоматически.
     environment:
-      POSTGRES_USER: user
-      POSTGRES_PASSWORD: pass
-      POSTGRES_DB: app
+      POSTGRES_USER: ${POSTGRES_USER}
+      POSTGRES_PASSWORD: ${POSTGRES_PASSWORD}
+      POSTGRES_DB: ${POSTGRES_DB}
+    volumes:
+     - db_volume:/var/lib/postgresql/data #данные PostgreSQL сохраняются.
+    
+volumes:
+  db_volume:
