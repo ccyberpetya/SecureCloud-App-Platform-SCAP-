@@ -8,11 +8,17 @@ services:
     ports:
       -  "8000:8000"
     depends_on:
-      - db
+      db:
+        condition: service_healthy
     environment:
       DATABASE_URL: ${DATABASE_URL}
     volumes:
       - .:/app
+    healthcheck:
+      test: ["CMD", "python", "-c", "import urllib.request; urllib.request.urlopen('http://localhost:8000/')"]
+      interval: 30s
+      timeout: 5s
+      retries: 3
   db:
     image: postgres:15
     restart: always #для db — база будет подниматься автоматически.
@@ -22,6 +28,11 @@ services:
       POSTGRES_DB: ${POSTGRES_DB}
     volumes:
      - db_volume:/var/lib/postgresql/data #данные PostgreSQL сохраняются.
+    healtcheck:
+      test: ["CMD-SHELL", "pg_isready -U ${POSTGRES_USER} -d ${POSTGRES_DB}"]
+      interval: 10s
+      timeout: 5s
+      retries: 5
     
 volumes:
   db_volume:
