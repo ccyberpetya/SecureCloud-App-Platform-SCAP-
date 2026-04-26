@@ -44,10 +44,10 @@ cp .env.example .env
 Отредактируй `.env`:
 
 ```env
-POSTGRES_USER=user
-POSTGRES_PASSWORD=pass
-POSTGRES_DB=app
-DATABASE_URL=postgresql://user:pass@db:5432/app
+POSTGRES_USER=your_user
+POSTGRES_PASSWORD=your_password
+POSTGRES_DB=your_db
+DATABASE_URL=postgresql://your_user:your_password@db:5432/your_db
 ```
 
 ---
@@ -98,7 +98,7 @@ trivy image <image_name>
 * Секреты не обнаружены
 * Ошибки конфигурации Dockerfile отсутствуют
 * Уязвимости в Python-зависимостях отсутствуют
-* Уязвимости на уровне ОС (Debian) присутствуют и приняты как риск базового образа
+* Уязвимости на уровне ОС присутствуют и приняты как риск базового образа
 
 ---
 
