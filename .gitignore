@@ -5,3 +5,8 @@ __pycache__/
 *.pyd
 venv/
 .env.local
+terraform/terraform.tfvars
+terraform/.terraform/
+terraform/.terraform.lock.hcl
+terraform/terraform.tfstate
+terraform/terraform.tfstate.backup
