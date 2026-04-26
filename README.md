@@ -121,3 +121,15 @@ trivy image <image_name>
 
 ---
 
+## Инфраструктура Terraform
+
+Проект содержит Terraform-конфигурацию для создания инфраструктуры в Yandex Cloud:
+- VPC
+- Subnet
+- Security Group
+- VM для приложения
+
+Команды:
+terraform init
+terraform plan
+terraform apply

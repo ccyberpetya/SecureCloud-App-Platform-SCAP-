@@ -28,7 +28,7 @@ variable "default_cidr" {
 
 variable "yandex_vpc" {
     type            = string
-    default         = "scap-vpc"
+    default         = "scap_vpc"
     description     = "VPC network/subnet name" 
 }
 
@@ -73,6 +73,73 @@ variable "app_resources" {
         hdd_size    = number
         hdd_type    = string
     })
+}
+
+#######
+variable "monitoring_name" {
+    type            = string
+    default         = "monitoring-platform"
+}
+
+variable "monitoring_platform_id" {
+    type            = string
+    default         = "standard-v3"
+  
+}
+
+variable "monitoring_core" {
+    type            = number
+    default         = 2
+}
+
+variable "monitoring_memory" {
+    type            = number
+    default         = 2
+}
+
+variable "monitoring_core_fraction" {
+    type            = number
+    default         = 20 
+}
+
+
+
+variable "monitoring_image_family" {
+    type            = string
+    default         = "ubuntu-2004-lts"  
+}
+
+variable "monitoring_resources" {
+    type =  object({
+        cores   = number
+        memory  = number
+        core_fraction = number
+        hdd_size    = number
+        hdd_type    = string
+    })
+}
+
+
+
+
+
+
+variable "allowed_ssh_cidrs" {
+  description = "Allowed CIDRs for SSH access"  
+  type = list(string)
+  default     = ["0.0.0.0/0"]
+}
+
+variable "allowed_http_app_cidrs" {
+  description = "Allowed CIDRs for http app access"  
+  type = list(string)
+  default     = ["0.0.0.0/0"]
+}
+
+variable "allowed_outbound_cidrs" {
+  description = "Allowed CIDRs for outbound access"  
+  type = list(string)
+  default     = ["0.0.0.0/0"]
 }
 
 variable "ssh_public_key_path" {
